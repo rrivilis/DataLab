@@ -91,7 +91,7 @@ negate_lot_blocks <- function(enrollment_table,
              (ProjectType %nin% c(3, 9, 10, 13) |
                 (EntryDate <= MoveInDateAdj &
                    MoveInDateAdj < ExitDateAdj))) %>%
-    mutate(range = iv(case_when(ProjectType %in% c(3, 9, 10, 13) ~ MoveInDateAdj,
+    mutate(range = iv(case_when(ProjectType %in% c(3, 9, 10, 13) & !is.na(MoveInDateAdj) ~ MoveInDateAdj,
                                 TRUE ~ EntryDate), 
                       ExitDateAdj))
   
